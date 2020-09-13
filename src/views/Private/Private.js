@@ -1,5 +1,5 @@
 import React from "react";
 
 export const Private = () => {
-  return <div></div>;
+  return <div>private</div>;
 };
