@@ -21,7 +21,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:local": "react-app-env --env-file=environments/.env.local start",
+    "start:dev": "react-app-env --env-file=environments/.env.development start",
+    "start:prod": "react-app-env --env-file=environments/.env.production start",
     "build": "react-scripts build",
+    "build:prod": "react-app-env --env-file=environments/.env.production build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
