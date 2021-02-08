@@ -1,5 +1,6 @@
 import React from "react";
-import "./Loading.scss"
+
+import i18n from './../../i18n'
 
 export const Loading = () => {
   return (
@@ -10,7 +11,7 @@ export const Loading = () => {
         <div className="shape shape-3"></div>
         <div className="shape shape-4"></div>
       </div>
-      <p>Loading...</p>
+      <p>{i18n.t('loading')}</p>
     </div>
   );
 };

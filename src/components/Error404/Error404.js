@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import MetaSEO from "./../MetaSEO";
+import { Link } from '@reach/router'
+
+import MetaDescription from "./../MetaDescription";
 
 import error404 from "./../../assets/img/404/404.svg";
 import rocket from "./../../assets/img/404/rocket.svg";
@@ -10,13 +11,11 @@ import moon from "./../../assets/img/404/moon.svg";
 import astronaut from "./../../assets/img/404/astronaut.svg";
 import logo from "./../../assets/img/404/logo.svg";
 
-import "./Error404.scss"
-
-export const Error404 = ({ path }) => {
-  const NAME = "ecommerce";
+export const Error404 = ({ redirect }) => {
+  const NAME = "template";
   return (
     <div className="bg-purple">
-      <MetaSEO
+      <MetaDescription
         title={`Error, page no found | ${NAME}`}
         description="el recurso que esta buscando no se encuentra"
         keywords={["Error", "404", "Pague no found"]}
@@ -34,9 +33,9 @@ export const Error404 = ({ path }) => {
             width="300px"
             alt="text 404"
           />
-          <a href="/" className="btn-go-home">
+          <Link to={redirect} className="btn-go-home">
             GO BACK HOME
-          </a>
+          </Link>
         </div>
         <div className="object">
           <img
@@ -81,9 +80,9 @@ export const Error404 = ({ path }) => {
 };
 
 Error404.propTypes = {
-  path: PropTypes.string.isRequired,
+  redirect: PropTypes.string.isRequired,
 };
 
 Error404.defaultProps = {
-  path: "/",
+  redirect: "/",
 };

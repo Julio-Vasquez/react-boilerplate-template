@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import PropTypes from "prop-types";
 
-export default function MetaSEO({ title, description, keywords }) {
+const MetaDescription = ({ title, description, keywords }) => {
   return (
     <Helmet>
       <title>{title}</title>
@@ -10,10 +10,12 @@ export default function MetaSEO({ title, description, keywords }) {
       <meta name="keywords" content={keywords.join(", ")} data-rh="true" />
     </Helmet>
   );
-}
+};
 
-MetaSEO.propTypes = {
+MetaDescription.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   keywords: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
+
+export default MetaDescription;

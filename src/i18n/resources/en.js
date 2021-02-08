@@ -23,4 +23,5 @@ export const EN = {
   register: "To register",
   reset_password: "Reset password",
   terms: "I accept the privacy policies, terms and conditions of the service.",
+  loading: "Loading...",
 };

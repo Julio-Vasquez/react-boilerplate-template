@@ -2,18 +2,19 @@ import React, { StrictMode, lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
+import { Provider } from 'react-redux'
 
 import "./sass/main.scss";
-import { Loading } from "./components/Loading";
-import reportWebVitals from './reportWebVitals';
+import App from "./views/App";
 
-const App = lazy(() => import("./views/App"));
+import reportWebVitals from "./reportWebVitals";
+import Store from './store'
 
 ReactDOM.render(
   <StrictMode>
-    <Suspense fallback={<Loading />}>
+    <Provider store={Store}>
       <App />
-    </Suspense>
+    </Provider>
   </StrictMode>,
   document.getElementById("root")
 );

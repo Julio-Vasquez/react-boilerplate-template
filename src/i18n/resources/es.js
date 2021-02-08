@@ -23,4 +23,5 @@ export const ES = {
   register: "registrate",
   reset_password: "Restaurar contraseña",
   terms: "Acepto las politicas de privacidad, terminos y condiciones",
+  loading: "Cargando...",
 };
