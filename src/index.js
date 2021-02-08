@@ -2,10 +2,10 @@ import React, { StrictMode, lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
-import * as serviceWorker from "./serviceWorker";
 
 import "./sass/main.scss";
 import { Loading } from "./components/Loading";
+import reportWebVitals from './reportWebVitals';
 
 const App = lazy(() => import("./views/App"));
 
@@ -18,4 +18,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-serviceWorker.register();
+reportWebVitals();
