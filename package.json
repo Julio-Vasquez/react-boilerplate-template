@@ -2,8 +2,9 @@
   "name": "react-boilerplate-template",
   "version": "0.1.1",
   "keywords": [
-    "template",
     "react",
+    "template",
+    "boilerplate",
     "javascript"
   ],
   "repository": "https://github.com/Julio-Vasquez/react-boilerplate-template.git",
