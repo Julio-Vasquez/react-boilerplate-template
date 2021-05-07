@@ -1,0 +1,49 @@
+$yellow: #feb60a;
+$red: #ff0062;
+$blue: #00dbf9;
+$violet: #da00f7;
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  & > div {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 100%;
+    margin: 2vw;
+    animation: scalate 1.5s 0.5s linear infinite;
+  }
+  :nth-child(1) {
+    background-color: $yellow;
+    animation-delay: 0.1s;
+  }
+  :nth-child(2) {
+    background-color: $red;
+    animation-delay: 0.2s;
+  }
+  :nth-child(3) {
+    background-color: $blue;
+    animation-delay: 0.3s;
+  }
+  :nth-child(4) {
+    background-color: $violet;
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes scalate {
+  0%,
+  50%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.6);
+  }
+  75% {
+    transform: scale(1.4);
+  }
+}
