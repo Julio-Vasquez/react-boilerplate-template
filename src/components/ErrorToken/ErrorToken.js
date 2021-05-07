@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Error404 = () => (
+export const ErrorToken = () => (
   <div id="notFound">
     <div className="notFound">
       <div className="notFound-404">
