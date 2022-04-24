@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import i18n from './../../i18n'
+import i18n from '../../i18n'
 
 export const Loading = () => {
   return (
@@ -13,5 +13,5 @@ export const Loading = () => {
       </div>
       <p>{i18n.t('loading')}</p>
     </div>
-  );
-};
+  )
+}

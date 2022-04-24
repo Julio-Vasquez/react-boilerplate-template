@@ -3,8 +3,6 @@ import { Redirect, Router } from '@reach/router'
 
 import { Loading } from './../../components/Loading'
 
-const Dashboard = lazy( () => import('./Dashboard') )
-
 const Dashboard = () => {
   return (
     <Suspense fallback={<Loading />}>
