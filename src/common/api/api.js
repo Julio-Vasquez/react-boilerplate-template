@@ -1,97 +1,94 @@
-import { Storage } from "./../token/tokens";
-import { auth } from "./../../services/auth/actions";
-import { store } from "./../../store";
+import { Storage } from './../token/tokens'
+import { auth } from './../../services/auth/actions'
+import { store } from './../../store'
 
-const API_URL = "se cambiara";
-class Api {
-  GET(url) {
-    url = new URL(`${API_URL}/${url}`);
-    return fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${Storage.GetToken()}`,
-      },
-    })
-      .then(async res => {
-        if (res.status === 401) {
-          store.dispatch(auth.logout());
-          return res;
-        }
-        res.payload = await res.json();
-        return res;
-      })
-      .catch(err => err);
-  }
+const BASE_URL_API = 'se cambiara'
 
-  POST(url, body, header) {
-    let dataBody = JSON.stringify(body);
-    return fetch(`${API_URL}/${url}`, {
-      method: "POST",
-      headers: header
-        ? header
-        : {
-          Accept: "application/json",
-          "Content-type": "application/json",
-          Authorization: `Bearer ${Storage.GetToken()}`,
-        },
-      body: dataBody,
-    })
-      .then(async res => {
-        if (res.status === 401) {
-          store.dispatch(auth.logout());
-          return res;
-        }
-        res.payload = await res.json();
-        return res;
-      })
-      .catch(err => err);
-  }
-
-  PUT(url, body, header) {
-    return fetch(`${API_URL}/${url}`, {
-      method: "PUT",
-      headers: header
-        ? header
-        : {
-          Accept: "application/json",
-          "Content-type": "application/json",
-          Authorization: `Bearer ${Storage.GetToken()}`,
-        },
-      body: JSON.stringify(body),
-    })
-      .then(async res => {
-        if (res.status === 401) {
-          store.dispatch(auth.logout());
-          return res;
-        }
-        res.payload = await res.json();
-        return res;
-      })
-      .catch(res => res);
-  }
-
-  DELETE(url, body, header) {
-    return fetch(`${API_URL}/${url}`, {
-      method: "DELETE",
-      headers: header
-        ? header
-        : {
-          Accept: "application/json",
-          "Content-type": "application/json",
-          Authorization: `Bearer ${Storage.GetToken()}`,
-        },
-      body: body ? body : "",
-    })
-      .then(async res => {
-        if (res.status === 401) {
-          store.dispatch(auth.logout());
-          return res;
-        }
-        res.payload = await res.json();
-        return res;
-      })
-      .catch(err => err);
-  }
+const errorJson = {
+  400: 'No se pudo interpretar la solicitud dada',
+  401: 'No Autorizado',
+  404: 'El servidor no pudo encontrar el contenido solicitado',
 }
 
-export const Api = new Api();
+const validateResponse = ({ status }) => {
+  message.error(errorJson[status])
+  store.dispatch(auth.logout())
+}
+
+export const GET = async ({ url }) => {
+  return fetch(`${BASE_URL_API}/${url}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${Storage.GetToken()}`,
+    },
+  })
+    .then(async res => {
+      if (res.statusText !== 'OK') validateResponse({ status: res.status })
+      res.payload = await res.json()
+      return res
+    })
+    .catch(error => message.error(error))
+}
+
+export const POST = async ({ url, body = {}, header = {} }) => {
+  return fetch(`${BASE_URL_API}/${url}`, {
+    method: 'POST',
+    headers: header
+      ? header
+      : {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+          'Access-Control-Allow-Origin': 'https://javascript.info',
+          Authorization: `Bearer ${Storage.GetToken()}`,
+        },
+    body: JSON.stringify(body),
+  })
+    .then(async res => {
+      if (res.statusText !== 'OK') validateResponse({ status: res.status })
+      res.payload = await res.json()
+      return res
+    })
+    .catch(error => message.error(error))
+}
+
+export const PUT = async ({ url, body = {}, header = {} }) => {
+  return fetch(`${BASE_URL_API}/${url}`, {
+    method: 'PUT',
+    headers: header
+      ? header
+      : {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${Storage.GetToken()}`,
+        },
+    body: JSON.stringify(body),
+  })
+    .then(async res => {
+      if (res.statusText !== 'OK') validateResponse({ status: res.status })
+      res.payload = await res.json()
+      return res
+    })
+    .catch(error => message.error(error))
+}
+
+export const DELETE = async ({ url, body = {}, header = {} }) => {
+  return fetch(`${BASE_URL_API}/${url}`, {
+    method: 'DELETE',
+    headers: header
+      ? header
+      : {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${Storage.GetToken()}`,
+        },
+    body: body ? JSON.stringify(body) : '',
+  })
+    .then(async res => {
+      if (res.statusText !== 'OK') validateResponse({ status: res.status })
+      res.payload = await res.json()
+      return res
+    })
+    .catch(error => message.error(error))
+}
