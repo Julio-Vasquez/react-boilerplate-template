@@ -8,6 +8,7 @@ const errorJson = {
   400: 'No se pudo interpretar la solicitud dada',
   401: 'No Autorizado',
   404: 'El servidor no pudo encontrar el contenido solicitado',
+  500: 'Ocurrio un error en el servicdor',
 }
 
 const validateResponse = ({ status }) => {
@@ -15,14 +16,17 @@ const validateResponse = ({ status }) => {
   store.dispatch(auth.logout())
 }
 
+const defaultHeader = {
+  Accept: 'application/json',
+  'Content-type': 'application/json',
+  'Access-Control-Allow-Origin': 'https://javascript.info',
+  Authorization: `Bearer ${Storage.GetToken()}`,
+}
+
 export const GET = async ({ url }) => {
   return fetch(`${BASE_URL_API}/${url}`, {
     method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${Storage.GetToken()}`,
-    },
+    headers: defaultHeader,
   })
     .then(async res => {
       if (res.statusText !== 'OK') validateResponse({ status: res.status })
@@ -35,14 +39,7 @@ export const GET = async ({ url }) => {
 export const POST = async ({ url, body = {}, header = {} }) => {
   return fetch(`${BASE_URL_API}/${url}`, {
     method: 'POST',
-    headers: header
-      ? header
-      : {
-          Accept: 'application/json',
-          'Content-type': 'application/json',
-          'Access-Control-Allow-Origin': 'https://javascript.info',
-          Authorization: `Bearer ${Storage.GetToken()}`,
-        },
+    headers: header ? header : defaultHeader,
     body: JSON.stringify(body),
   })
     .then(async res => {
@@ -56,13 +53,7 @@ export const POST = async ({ url, body = {}, header = {} }) => {
 export const PUT = async ({ url, body = {}, header = {} }) => {
   return fetch(`${BASE_URL_API}/${url}`, {
     method: 'PUT',
-    headers: header
-      ? header
-      : {
-          Accept: 'application/json',
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${Storage.GetToken()}`,
-        },
+    headers: header ? header : defaultHeader,
     body: JSON.stringify(body),
   })
     .then(async res => {
@@ -76,13 +67,7 @@ export const PUT = async ({ url, body = {}, header = {} }) => {
 export const DELETE = async ({ url, body = {}, header = {} }) => {
   return fetch(`${BASE_URL_API}/${url}`, {
     method: 'DELETE',
-    headers: header
-      ? header
-      : {
-          Accept: 'application/json',
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${Storage.GetToken()}`,
-        },
+    headers: header ? header : defaultHeader,
     body: body ? JSON.stringify(body) : '',
   })
     .then(async res => {
