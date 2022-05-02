@@ -1,20 +1,7 @@
 import { Storage } from './../token/tokens'
-import { auth } from './../../services/auth/actions'
-import { store } from './../../store'
+import { validateResponse } from '../messages/responseMessage'
 
 const BASE_URL_API = 'se cambiara'
-
-const errorJson = {
-  400: 'No se pudo interpretar la solicitud dada',
-  401: 'No Autorizado',
-  404: 'El servidor no pudo encontrar el contenido solicitado',
-  500: 'Ocurrio un error en el servicdor',
-}
-
-const validateResponse = ({ status }) => {
-  message.error(errorJson[status])
-  store.dispatch(auth.logout())
-}
 
 const defaultHeader = {
   Accept: 'application/json',

@@ -7,7 +7,7 @@ export const initialState = {
   loading: false,
   token: '',
   message: '',
-  username: ''
+  username: '',
 }
 
 const AuthSlice = createSlice({
@@ -15,7 +15,7 @@ const AuthSlice = createSlice({
   initialState,
   reducers: {
     //login(username, password)
-    login(state, { payload }){
+    login(state, { payload }) {
       const { username } = payload
       state.loading = true
       state.error = false
@@ -24,7 +24,7 @@ const AuthSlice = createSlice({
       state.username = username
     },
     //loginSuccess(token)
-    loginSuccess(state, {payload}){
+    loginSuccess(state, { payload }) {
       state.loading = false
       state.error = false
       state.success = true
@@ -33,17 +33,18 @@ const AuthSlice = createSlice({
       state.authentication = true
     },
     //loginFailed(message)
-    loginFailed(state, {payload}){
+    loginFailed(state, { payload }) {
       state.loading = false
       state.error = true
       state.success = false
       state.message = payload
       state.token = ''
       state.authentication = true
-    }
-  }
+    },
+    logout() {},
+  },
 })
 
-export const { login, loginSuccess, loginFailed } = AuthSlice.actions
+export const { login, loginSuccess, loginFailed, logout } = AuthSlice.actions
 
 export default AuthSlice.reducer
