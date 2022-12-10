@@ -1,46 +1,77 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import MetaDescription from '../../../components/MetaDescription'
+import propTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { Button, Form, Input } from 'antd'
 
-import i18n from '../../../i18n'
-import { login } from '../../../services/auth/authSlice'
+import { useIntl } from './../../../hooks/useIntl'
 
-const Login = () => {
-  const [form, setForm] = useState({
-    username: '',
-    password: '',
-  })
+const { Item, useForm } = Form
 
-  const dispatch = useDispatch()
+export const Login = ({ description }) => {
+    const { formatMessage } = useIntl()
+    const [form] = useForm()
 
-  const onChange = e => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    })
-    console.log(`${[e.target.name]} : ${e.target.value}`)
-  }
+    const onFinish = values => {
+        console.log('Success:', values)
+    }
 
-  const onSubmit = e => {
-    e.preventDefault()
-    dispatch(login(form))
-  }
+    const onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo)
+    }
 
-  return (
-    <div>
-      <MetaDescription
-        title={i18n.t('login')}
-        description="Login Page"
-        keywords={['login', 'auth']}
-      />
-      <h3>{i18n.t('login')}</h3>
-      <form onChange={onChange} onSubmit={onSubmit}>
-        <input type="text" name="username" />
-        <input type="password" name="password" />
-        <input type="submit" value={i18n.t('login')} />
-      </form>
-    </div>
-  )
+    return (
+        <Form
+            name='basic'
+            labelCol={{ span: 10 }}
+            wrapperCol={{ span: 6 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete='off'
+            form={form}
+        >
+            <h1>{formatMessage({ id: 'button.login' })}</h1>
+
+            <Item
+                label='Username'
+                name='username'
+                rules={[{ required: true, message: 'Please input your username!' }]}
+                wrapperCol={{ offset: 0, span: 8 }}
+            >
+                <Input />
+            </Item>
+
+            <Item
+                label='Password'
+                name='password'
+                rules={[{ required: true, message: 'Please input your password!' }]}
+                wrapperCol={{ offset: 0, span: 8 }}
+            >
+                <Input.Password />
+            </Item>
+
+            <Item
+                name='remember'
+                valuePropName='checked'
+                wrapperCol={{ offset: 11, span: 5 }}
+            >
+                <Link to='/'>{formatMessage({ id: 'text.forgotPassword' })}</Link>
+            </Item>
+
+            <Item wrapperCol={{ offset: 12, span: 12 }}>
+                <Button type='primary' htmlType='submit'>
+                    {formatMessage({ id: 'button.login' })}
+                </Button>
+            </Item>
+        </Form>
+    )
+}
+
+Login.propTypes = {
+    description: propTypes.string,
+}
+
+Login.defaultProps = {
+    description: 'Login',
 }
 
 export default Login

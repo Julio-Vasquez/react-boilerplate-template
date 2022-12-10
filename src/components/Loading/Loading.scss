@@ -18,7 +18,7 @@ $amount: 18px;
       width: $shapeDimentions;
       height: $shapeDimentions;
       border-radius: 2px;
-      &.shape{
+      &.shape {
         &-1 {
           left: 0;
           background-color: #4285f4;
@@ -69,34 +69,20 @@ $amount: 18px;
 }
 
 @keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes colorLoading {
-  25% {
-    color: #4285f4;
-  }
-  50% {
-    color: #34a853;
-  }
-  75% {
-    color: #ea4335;
-  }
-  100% {
-    color: #fbbc05;
-  }
+  25% { color: #4285f4; }
+  50% { color: #34a853; }
+  75% { color: #ea4335; }
+  100% { color: #fbbc05; }
 }
 
 @for $i from 1 through 4 {
   @keyframes shape#{$i} {
-    0% {
-      transform: translate(0, 0);
-    }
+    0% { transform: translate(0, 0); }
     25% {
       @include customTranslate($i, 0, $amount);
     }

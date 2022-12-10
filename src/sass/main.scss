@@ -1,13 +1,6 @@
-@forward './base/all';
+@forward './base/main';
 
-@forward './components/all';
+@forward './utils/main';
 
-@forward './layout/all';
+@import "./vendors/antd";
 
-@forward './theme/all';
-
-@forward './utils/all';
-
-@forward './vendors/all';
-
-@forward './views/all';

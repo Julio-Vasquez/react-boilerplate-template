@@ -1,20 +1,23 @@
-import React from 'react'
-import { HelmetProvider } from 'react-helmet-async'
+import { Provider } from 'react-redux'
+import { I18nextProvider } from 'react-i18next'
 
-import i18n from '../i18n'
+import { PublicRoutes } from '../routes/PublicRoutes'
+import { PrivateRoutes } from '../routes/PrivateRoutes'
 
-import { Public } from './Public'
-import { Private } from './Private'
+import store from '../store'
+import i18n from '../i18n/config'
+import { useIntl } from '../hooks/useIntl'
 
 const App = () => {
-  const autentication = false
-  return (
-    <div className="App">
-      <HelmetProvider>
-        {autentication ? <Private /> : <Public />}
-      </HelmetProvider>
-    </div>
-  )
+    const { formatMessage } = useIntl()
+
+    return (
+        <Provider store={store}>
+            <I18nextProvider i18n={i18n}>
+                {true === true ? <PublicRoutes /> : <PrivateRoutes />}
+            </I18nextProvider>
+        </Provider>
+    )
 }
 
 export default App
