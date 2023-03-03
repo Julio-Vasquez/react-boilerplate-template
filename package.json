@@ -12,6 +12,7 @@
     "author": "Julio Vásquez <jualvalitube@gmail.com>",
     "license": "MIT",
     "scripts": {
+        "start": "npx http-server ./dist",
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
